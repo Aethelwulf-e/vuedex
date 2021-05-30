@@ -1,9 +1,9 @@
 <template>
-  <div class="d-flex justify-center mb-5" id="Pokemon">
+  <div class="d-flex justify-center ml-5" id="Pokemon">
     <v-card elevation="2" width="300">
-      <v-card-title>{{pokemon.name}}</v-card-title>
-      <div v-for="item in pokemon.abilities" :key="item.ability">
-        {{item.ability.name}}
+      <v-card-title>{{ pokemonName }}</v-card-title>
+      <div v-for="slot in abilities" :key="slot.ability">
+        {{ slot.ability.name }}
       </div>
     </v-card>
   </div>
@@ -13,32 +13,15 @@
 </style>
 
 <script>
-import PokemonDataService from "../services/PokemonDataService";
 export default {
   name: "Pokemon",
 
-  data: () => ({
-    pokemon: {
-      name: "",
-      abilities: [],
-    },
-  }),
-
-  methods: {
-    getPokemonByName(name) {
-      PokemonDataService.getByName(name)
-        .then((response) => {
-          this.pokemon.name = response.data.name;
-          this.pokemon.abilities = response.data.abilities;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+  props: {
+    dexId: String,
+    pokemonName: String,
+    imageUrl: String,
+    types: Array,
+    abilities: Array,
   },
-
-  mounted() {
-    this.getPokemonByName("torterra");
-  }
 };
 </script>

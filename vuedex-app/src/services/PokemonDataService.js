@@ -1,4 +1,4 @@
-import https from "../http-common"
+import https from "../https-common"
 
 class PokemonDataService {
   getByName(name) {

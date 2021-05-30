@@ -18,8 +18,7 @@
       </v-btn>
     </v-app-bar>
 
-    <Pokemon />
-
+    <Pokemon :pokemonName="tmpPoke.name" :abilities="tmpPoke.abilities"/>
   </div>
 </template>
 
@@ -36,6 +35,7 @@
 
 <script>
 import Pokemon from "./components/Pokemon";
+import PokemonDataService from "./services/PokemonDataService";
 
 export default {
   name: "App",
@@ -46,6 +46,27 @@ export default {
 
   data: () => ({
     Title: "Vuedex",
+    tmpPoke: {
+      name: "",
+      abilities: [],
+    },
   }),
+
+  methods: {
+    getPokemonByName(name) {
+      PokemonDataService.getByName(name)
+        .then((response) => {
+          this.tmpPoke.name = response.data.name;
+          this.tmpPoke.abilities = response.data.abilities;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+
+  mounted() {
+    this.getPokemonByName("empoleon");
+  },
 };
 </script>
