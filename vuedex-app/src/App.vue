@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="d-flex justify-center mb-5">
-    <v-app-bar color="black" dark>
+  <v-app id="app" class="d-flex justify-center mb-5">
+    <v-app-bar dark>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-app-bar-title class="nav-bar-title">{{ Title }}</v-app-bar-title>
@@ -13,13 +13,24 @@
         class="text-field-pos"
       />
 
-      <v-btn icon>
+      <v-btn icon class="search-button">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <Pokemon :pokemonName="tmpPoke.name" :abilities="tmpPoke.abilities"/>
-  </div>
+    <v-container grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex
+          md4
+          style="width: 1000px"
+          v-for="pokemon in pokemonList"
+          :key="pokemon.name"
+        >
+          <Pokemon :pokeInfoUrl="pokemon.url" />
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-app>
 </template>
 
 <style>
@@ -30,6 +41,10 @@
 
 .text-field-pos {
   margin-top: 25px !important;
+}
+
+.search-button {
+  margin-left: 10px !important;
 }
 </style>
 
@@ -46,18 +61,14 @@ export default {
 
   data: () => ({
     Title: "Vuedex",
-    tmpPoke: {
-      name: "",
-      abilities: [],
-    },
+    pokemonList: [],
   }),
 
   methods: {
-    getPokemonByName(name) {
-      PokemonDataService.getByName(name)
+    getFirstGenPokemon() {
+      PokemonDataService.getKantoPokemon()
         .then((response) => {
-          this.tmpPoke.name = response.data.name;
-          this.tmpPoke.abilities = response.data.abilities;
+          this.pokemonList = response.data.results;
         })
         .catch((err) => {
           console.log(err);
@@ -66,7 +77,7 @@ export default {
   },
 
   mounted() {
-    this.getPokemonByName("empoleon");
+    this.getFirstGenPokemon();
   },
 };
 </script>
