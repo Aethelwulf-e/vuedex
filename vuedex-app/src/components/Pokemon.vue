@@ -1,6 +1,6 @@
 <template>
   <div id="Pokemon">
-    <v-card color="red darken-1">
+    <v-card :color='getColorByPokemonType("c")'>
       <v-img class="ml-2" max-height="200" max-width="200" :src="this.pokemon.imageUrl" />
     </v-card>
   </div>
@@ -53,6 +53,18 @@ export default {
           console.log(err);
         });
     },
+
+    getColorByPokemonType(type) {
+      if(type == 'a') {
+        return '#E53935'
+      }
+      else if(type == 'b') {
+        return '#880E4F'
+      }
+      else {
+        return '#4A148C'
+      }
+    }
   },
 
   mounted() {

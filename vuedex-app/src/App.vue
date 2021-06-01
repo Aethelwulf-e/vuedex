@@ -3,7 +3,7 @@
     <v-app-bar dark>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-app-bar-title class="nav-bar-title">{{ Title }}</v-app-bar-title>
+      <v-app-bar-title>{{ Title }}</v-app-bar-title>
 
       <v-spacer></v-spacer>
 
@@ -34,11 +34,6 @@
 </template>
 
 <style>
-.nav-bar-title {
-  font-size: 1.7rem !important;
-  margin-left: 30px;
-}
-
 .text-field-pos {
   margin-top: 25px !important;
 }
