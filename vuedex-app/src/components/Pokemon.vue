@@ -1,7 +1,21 @@
 <template>
   <div id="Pokemon">
-    <v-card :color='getColorByPokemonType("c")'>
-      <v-img class="ml-2" max-height="200" max-width="200" :src="this.pokemon.imageUrl" />
+    <v-card
+      class="mx-auto"
+      :color="this.getCardColor(this.pokemon.types[0].type.name)"
+    >
+      <v-list-item>
+        <v-img max-height="200" max-width="200" :src="this.pokemon.imageUrl" />
+
+        <v-list-item-content>
+          <v-list-item-title class="white--text font-weight-bold"
+            >{{ this.pokemon.dexId }} {{ this.pokemon.name }}</v-list-item-title
+          >
+          <v-list-item-title class="title mb-1"
+            >Nike epic react</v-list-item-title
+          >
+        </v-list-item-content>
+      </v-list-item>
     </v-card>
   </div>
 </template>
@@ -11,6 +25,7 @@
 
 <script>
 import PokemonDataService from "../services/PokemonDataService";
+import ColorPicker from "../utils/ColorPicker";
 
 export default {
   name: "Pokemon",
@@ -39,13 +54,11 @@ export default {
           this.pokemon.types = response.data.types;
           this.pokemon.abilities = response.data.abilities;
 
-          if(this.pokemon.dexId < 10) {
+          if (this.pokemon.dexId < 10) {
             this.pokemon.dexId = "#00" + response.data.id;
-          }
-          else if(this.pokemon.dexId < 100) {
+          } else if (this.pokemon.dexId < 100) {
             this.pokemon.dexId = "#0" + response.data.id;
-          }
-          else {
+          } else {
             this.pokemon.dexId = "#" + response.data.id;
           }
         })
@@ -54,16 +67,12 @@ export default {
         });
     },
 
-    getColorByPokemonType(type) {
-      if(type == 'a') {
-        return '#E53935'
-      }
-      else if(type == 'b') {
-        return '#880E4F'
-      }
-      else {
-        return '#4A148C'
-      }
+    getCardColor(type) {
+      return ColorPicker.getCardColorByType(type);
+    },
+
+    getChipColor(type) {
+      return ColorPicker.getChipColorByType(type);
     }
   },
 
