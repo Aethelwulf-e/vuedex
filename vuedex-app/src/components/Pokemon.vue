@@ -60,7 +60,6 @@ export default {
       types: [],
       abilities: [],
     },
-    nani: "nani",
   }),
 
   methods: {
@@ -91,7 +90,6 @@ export default {
     },
 
     getChipColor(type) {
-      this.nani = type;
       return ColorPicker.getChipColorByType(type);
     },
   },
