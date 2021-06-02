@@ -23,7 +23,13 @@
                 small
               >
                 <v-avatar left>
-                  <v-icon small>mdi-account-circle</v-icon>
+                  <v-img
+                    max-width="15"
+                    max-height="15"
+                    alt
+                    class="icon"
+                    :src="require(`@/assets/icons/${item.type.name}.svg`)"
+                  />
                 </v-avatar>
                 {{ item.type.name }}
               </v-chip>

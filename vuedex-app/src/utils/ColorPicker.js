@@ -64,7 +64,7 @@ class ColorPicker {
       return "#49392F"
     }
     if (type == 'electric') {
-      return "#FAE078"
+      return "#A1871F"
     }
     if (type == 'fairy') {
       return "#9B6470"
@@ -76,7 +76,7 @@ class ColorPicker {
       return "#7D1F1A"
     }
     if (type == 'fire') {
-      return "#F5AC78"
+      return "#9C531F"
     }
     if (type == 'flying') {
       return "#C6B7F5"
@@ -88,7 +88,7 @@ class ColorPicker {
       return "#4E8234"
     }
     if (type == 'ground') {
-      return "#EBD69D"
+      return "#927D44"
     }
     if (type == 'ice') {
       return "#BCE6E6"
