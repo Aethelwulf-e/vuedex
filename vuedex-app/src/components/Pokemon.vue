@@ -2,18 +2,33 @@
   <div id="Pokemon">
     <v-card
       class="mx-auto"
+      outlined
       :color="this.getCardColor(this.pokemon.types[0].type.name)"
     >
       <v-list-item>
-        <v-img max-height="200" max-width="200" :src="this.pokemon.imageUrl" />
+        <v-img max-height="200" max-width="150" :src="this.pokemon.imageUrl" />
 
         <v-list-item-content>
-          <v-list-item-title class="white--text font-weight-bold"
+          <v-list-item-title class="white--text font-weight-bold title m0"
             >{{ this.pokemon.dexId }} {{ this.pokemon.name }}</v-list-item-title
           >
-          <v-list-item-title class="title mb-1"
-            >Nike epic react</v-list-item-title
-          >
+          <v-list-item-title>
+            <div>
+              <v-chip
+                v-for="(item, index) in this.pokemon.types"
+                :key="index"
+                :color="getChipColor(item.type.name)"
+                class="mt-3 mr-2"
+                text-color="white"
+                small
+              >
+                <v-avatar left>
+                  <v-icon small>mdi-account-circle</v-icon>
+                </v-avatar>
+                {{ item.type.name }}
+              </v-chip>
+            </div>
+          </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-card>
@@ -21,6 +36,9 @@
 </template>
 
 <style>
+.short-chip {
+  width: 100px;
+}
 </style>
 
 <script>
@@ -42,6 +60,7 @@ export default {
       types: [],
       abilities: [],
     },
+    nani: "nani",
   }),
 
   methods: {
@@ -72,8 +91,9 @@ export default {
     },
 
     getChipColor(type) {
+      this.nani = type;
       return ColorPicker.getChipColorByType(type);
-    }
+    },
   },
 
   mounted() {
