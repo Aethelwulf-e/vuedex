@@ -1,18 +1,20 @@
 <template>
   <div id="Pokemon">
     <v-card
-      class="mx-auto"
       outlined
+      style="height: 200px"
       :color="this.getCardColor(this.pokemon.types[0].type.name)"
     >
       <v-list-item>
-        <v-img max-height="200" max-width="150" :src="this.pokemon.imageUrl" />
+        <div >
+          <v-img min-height="150" min-width="150" :src="this.pokemon.imageUrl" />
+        </div>
 
-        <v-list-item-content>
+        <v-list-item-content class="pt-4">
           <v-list-item-title class="white--text font-weight-bold title m0"
             >{{ this.pokemon.dexId }} {{ this.pokemon.name }}</v-list-item-title
           >
-          <v-list-item-title>
+          <v-list-item-group>
             <div>
               <v-chip
                 v-for="(item, index) in this.pokemon.types"
@@ -34,7 +36,26 @@
                 {{ item.type.name }}
               </v-chip>
             </div>
-          </v-list-item-title>
+          </v-list-item-group>
+
+          <v-list-item-group>
+            <div>
+              <v-list-item-title
+                class="white--text font-weight-medium subtitle-2 mt-4"
+              >
+                <span id="abilities">abilities</span>
+              </v-list-item-title>
+
+              <v-chip
+                v-for="(item, index) in this.pokemon.abilities"
+                :key="index"
+                class="mr-2 mt-3"
+                text-color="white"
+                small
+                >{{ item.ability.name }}</v-chip
+              >
+            </div>
+          </v-list-item-group>
         </v-list-item-content>
       </v-list-item>
     </v-card>
@@ -42,8 +63,16 @@
 </template>
 
 <style>
-.short-chip {
-  width: 100px;
+span#abilities {
+  display: flex;
+}
+span#abilities:before,
+span#abilities:after {
+  color: white;
+  content: "";
+  flex: 1;
+  border-bottom: groove 2px;
+  margin: auto 0.25em;
 }
 </style>
 
