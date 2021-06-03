@@ -2,25 +2,26 @@
   <div id="Pokemon">
     <v-card
       outlined
+      max-width="700"
       style="height: 200px"
       :color="this.getCardColor(this.pokemon.types[0].type.name)"
     >
       <v-list-item>
-        <div >
-          <v-img min-height="150" min-width="150" :src="this.pokemon.imageUrl" />
-        </div>
+        <v-list-item-avatar tile size="150">
+          <v-img :src="this.pokemon.imageUrl" />
+        </v-list-item-avatar>
 
-        <v-list-item-content class="pt-4">
-          <v-list-item-title class="white--text font-weight-bold title m0"
+        <v-list-item-content class="mt-2">
+          <v-list-item-title class="white--text font-weight-bold title"
             >{{ this.pokemon.dexId }} {{ this.pokemon.name }}</v-list-item-title
           >
-          <v-list-item-group>
+          <v-list-item-content>
             <div>
               <v-chip
                 v-for="(item, index) in this.pokemon.types"
                 :key="index"
                 :color="getChipColor(item.type.name)"
-                class="mt-3 mr-2"
+                class="mr-1"
                 text-color="white"
                 small
               >
@@ -36,12 +37,12 @@
                 {{ item.type.name }}
               </v-chip>
             </div>
-          </v-list-item-group>
+          </v-list-item-content>
 
-          <v-list-item-group>
+          <v-list-item-content>
             <div>
               <v-list-item-title
-                class="white--text font-weight-medium subtitle-2 mt-4"
+                class="white--text font-weight-medium subtitle-2 mb-1"
               >
                 <span id="abilities">abilities</span>
               </v-list-item-title>
@@ -49,13 +50,13 @@
               <v-chip
                 v-for="(item, index) in this.pokemon.abilities"
                 :key="index"
-                class="mr-2 mt-3"
-                text-color="white"
-                small
+                class="mr-2 mt-2 font-weight-medium"
+                text-color="black"
+                x-small
                 >{{ item.ability.name }}</v-chip
               >
             </div>
-          </v-list-item-group>
+          </v-list-item-content>
         </v-list-item-content>
       </v-list-item>
     </v-card>
@@ -66,6 +67,7 @@
 span#abilities {
   display: flex;
 }
+
 span#abilities:before,
 span#abilities:after {
   color: white;
