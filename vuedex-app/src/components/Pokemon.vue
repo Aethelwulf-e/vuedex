@@ -4,10 +4,10 @@
       outlined
       max-width="700"
       style="height: 200px"
-      :color="this.getCardColor(this.pokemon.types[0].type.name)"
+      :color="getCardColor(this.pokemon.types[0].type.name)"
     >
       <v-list-item>
-        <v-list-item-avatar tile size="150">
+        <v-list-item-avatar tile size="140">
           <v-img :src="this.pokemon.imageUrl" />
         </v-list-item-avatar>
 

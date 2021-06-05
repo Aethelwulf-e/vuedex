@@ -2,7 +2,7 @@
   <div id="app">
     <v-app id="inspire" class="d-flex justify-center mb-5">
       <v-app-bar dark>
-        <v-app-bar-nav-icon @click="lateralMenu = true" />
+        <v-app-bar-nav-icon @click.stop="lateralMenu = !lateralMenu" />
 
         <v-app-bar-title>{{ Title }}</v-app-bar-title>
 
@@ -49,7 +49,7 @@
 
               <v-divider class="mb-3" />
 
-              <v-list-item>
+              <v-list-item @click="getFirstGenPokemon()">
                 <v-list-item-icon>
                   <v-img
                     max-width="25"
@@ -62,7 +62,7 @@
                 <v-list-item-title>Kanto</v-list-item-title>
               </v-list-item>
 
-              <v-list-item>
+              <v-list-item @click="getSecondGenPokemon()">
                 <v-list-item-icon>
                   <v-img
                     max-width="25"
@@ -75,7 +75,7 @@
                 <v-list-item-title>Johto</v-list-item-title>
               </v-list-item>
 
-              <v-list-item>
+              <v-list-item @click="getThirdGenPokemon()">
                 <v-list-item-icon>
                   <v-img
                     max-width="25"
@@ -88,7 +88,7 @@
                 <v-list-item-title>Hoenn</v-list-item-title>
               </v-list-item>
 
-              <v-list-item>
+              <v-list-item @click="getFourthGenPokemon()">
                 <v-list-item-icon>
                   <v-img
                     max-width="25"
@@ -152,6 +152,36 @@ export default {
   methods: {
     getFirstGenPokemon() {
       PokemonDataService.getKantoPokemon()
+        .then((response) => {
+          this.pokemonList = response.data.results;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getSecondGenPokemon() {
+      PokemonDataService.getJohtoPokemon()
+        .then((response) => {
+          this.pokemonList = response.data.results;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getThirdGenPokemon() {
+      PokemonDataService.getHoennPokemon()
+        .then((response) => {
+          this.pokemonList = response.data.results;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getFourthGenPokemon() {
+      PokemonDataService.getSinnohPokemon()
         .then((response) => {
           this.pokemonList = response.data.results;
         })

@@ -13,6 +13,18 @@ class PokemonDataService {
     return https.get(`/pokemon?limit=151`)
   }
 
+  getJohtoPokemon() {
+    return https.get(`/pokemon?offset=151&limit=100`)
+  }
+
+  getHoennPokemon() {
+    return https.get(`/pokemon?offset=251&limit=135`)
+  }
+
+  getSinnohPokemon() {
+    return https.get(`/pokemon?offset=386&limit=107`)
+  }
+
   getPokemonContentByUrl(url) {
     return https.get(url)
   }
