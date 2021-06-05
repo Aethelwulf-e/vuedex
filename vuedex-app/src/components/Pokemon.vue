@@ -31,7 +31,7 @@
                     max-height="15"
                     alt
                     class="icon"
-                    :src="require(`@/assets/icons/${item.type.name}.svg`)"
+                    :src="require(`@/assets/icons/pokemon_types/${item.type.name}.svg`)"
                   />
                 </v-avatar>
                 {{ item.type.name }}
