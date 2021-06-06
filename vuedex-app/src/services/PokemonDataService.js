@@ -25,6 +25,22 @@ class PokemonDataService {
     return https.get(`/pokemon?offset=386&limit=107`)
   }
 
+  getUnovaPokemon() {
+    return https.get(`/pokemon?offset=493&limit=156`)
+  }
+
+  getKalosPokemon() {
+    return https.get(`/pokemon?offset=649&limit=72`)
+  }
+
+  getAlolaPokemon() {
+    return https.get(`/pokemon?offset=721&limit=88`)
+  }
+
+  getGalarPokemon() {
+    return https.get(`/pokemon?offset=809&limit=89`)
+  }
+
   getPokemonContentByUrl(url) {
     return https.get(url)
   }

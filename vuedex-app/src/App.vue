@@ -52,11 +52,11 @@
               <v-list-item @click="getFirstGenPokemon()">
                 <v-list-item-icon>
                   <v-img
-                    max-width="25"
-                    max-height="25"
+                    max-width="20"
+                    max-height="20"
                     alt
-                    class="icon"
-                    :src="require(`@/assets/icons/pokeballs/pokeball.svg`)"
+                    class="icon mt-1"
+                    :src="require(`@/assets/icons/pokeballs/pokeball.png`)"
                   />
                 </v-list-item-icon>
                 <v-list-item-title>Kanto</v-list-item-title>
@@ -65,11 +65,11 @@
               <v-list-item @click="getSecondGenPokemon()">
                 <v-list-item-icon>
                   <v-img
-                    max-width="25"
-                    max-height="25"
+                    max-width="20"
+                    max-height="20"
                     alt
-                    class="icon"
-                    :src="require(`@/assets/icons/pokeballs/greatball.svg`)"
+                    class="icon mt-1"
+                    :src="require(`@/assets/icons/pokeballs/greatball.png`)"
                   />
                 </v-list-item-icon>
                 <v-list-item-title>Johto</v-list-item-title>
@@ -78,11 +78,11 @@
               <v-list-item @click="getThirdGenPokemon()">
                 <v-list-item-icon>
                   <v-img
-                    max-width="25"
-                    max-height="25"
+                    max-width="20"
+                    max-height="20"
                     alt
-                    class="icon"
-                    :src="require(`@/assets/icons/pokeballs/ultraball.svg`)"
+                    class="icon mt-1"
+                    :src="require(`@/assets/icons/pokeballs/ultraball.png`)"
                   />
                 </v-list-item-icon>
                 <v-list-item-title>Hoenn</v-list-item-title>
@@ -91,14 +91,66 @@
               <v-list-item @click="getFourthGenPokemon()">
                 <v-list-item-icon>
                   <v-img
-                    max-width="25"
-                    max-height="25"
+                    max-width="20"
+                    max-height="20"
                     alt
-                    class="icon"
-                    :src="require(`@/assets/icons/pokeballs/masterball.svg`)"
+                    class="icon mt-1"
+                    :src="require(`@/assets/icons/pokeballs/masterball.png`)"
                   />
                 </v-list-item-icon>
                 <v-list-item-title>Sinnoh</v-list-item-title>
+              </v-list-item>
+
+              <v-list-item @click="getFifthGenPokemon()">
+                <v-list-item-icon>
+                  <v-img
+                    max-width="20"
+                    max-height="20"
+                    alt
+                    class="icon mt-1"
+                    :src="require(`@/assets/icons/pokeballs/premierball.png`)"
+                  />
+                </v-list-item-icon>
+                <v-list-item-title>Unova</v-list-item-title>
+              </v-list-item>
+
+              <v-list-item @click="getSixthGenPokemon()">
+                <v-list-item-icon>
+                  <v-img
+                    max-width="20"
+                    max-height="20"
+                    alt
+                    class="icon mt-1"
+                    :src="require(`@/assets/icons/pokeballs/safariball.png`)"
+                  />
+                </v-list-item-icon>
+                <v-list-item-title>Kalos</v-list-item-title>
+              </v-list-item>
+
+              <v-list-item @click="getSeventhGenPokemon()">
+                <v-list-item-icon>
+                  <v-img
+                    max-width="20"
+                    max-height="20"
+                    alt
+                    class="icon mt-1"
+                    :src="require(`@/assets/icons/pokeballs/quickball.png`)"
+                  />
+                </v-list-item-icon>
+                <v-list-item-title>Alola</v-list-item-title>
+              </v-list-item>
+
+              <v-list-item @click="getEighthGenPokemon()">
+                <v-list-item-icon>
+                  <v-img
+                    max-width="20"
+                    max-height="20"
+                    alt
+                    class="icon mt-1"
+                    :src="require(`@/assets/icons/pokeballs/levelball.png`)"
+                  />
+                </v-list-item-icon>
+                <v-list-item-title>Galar</v-list-item-title>
               </v-list-item>
             </template>
           </v-list-item-group>
@@ -182,6 +234,46 @@ export default {
 
     getFourthGenPokemon() {
       PokemonDataService.getSinnohPokemon()
+        .then((response) => {
+          this.pokemonList = response.data.results;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getFifthGenPokemon() {
+      PokemonDataService.getUnovaPokemon()
+        .then((response) => {
+          this.pokemonList = response.data.results;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getSixthGenPokemon() {
+      PokemonDataService.getKalosPokemon()
+        .then((response) => {
+          this.pokemonList = response.data.results;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getSeventhGenPokemon() {
+      PokemonDataService.getAlolaPokemon()
+        .then((response) => {
+          this.pokemonList = response.data.results;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getEighthGenPokemon() {
+      PokemonDataService.getGalarPokemon()
         .then((response) => {
           this.pokemonList = response.data.results;
         })
