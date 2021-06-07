@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app id="inspire" class="d-flex justify-center mb-5">
-      <v-app-bar dark>
+      <v-app-bar dark top fixed>
         <v-app-bar-nav-icon @click.stop="lateralMenu = !lateralMenu" />
 
         <v-app-bar-title>{{ Title }}</v-app-bar-title>
@@ -9,12 +9,14 @@
         <v-spacer></v-spacer>
 
         <v-text-field
-          label="Ex: Pokémon, Abilities, Types"
+          v-model="searchString"
+          label="Ex: Bulbasaur"
           solo
           class="text-field-pos"
+          @keydown.enter="searchPokemon"
         />
 
-        <v-btn icon class="search-button">
+        <v-btn icon class="search-button" @click="searchPokemon">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
       </v-app-bar>
@@ -42,7 +44,7 @@
                     Regions
                   </v-list-item-title>
                   <v-list-item-subtitle>
-                    Filter by regions
+                    Filter by region
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -157,7 +159,11 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-container grid-list-md text-xs-center>
+      <v-overlay :absolute="absolute" :value="overlay">
+        <v-progress-circular indeterminate size="64" />
+      </v-overlay>
+
+      <v-container grid-list-md text-xs-center class="mt-15">
         <v-layout row wrap>
           <v-flex
             md4
@@ -180,6 +186,7 @@
 
 .search-button {
   margin-left: 10px !important;
+  margin-right: 5px !important;
 }
 </style>
 
@@ -198,10 +205,32 @@ export default {
     Title: "Vuedex",
     lateralMenu: false,
     lateralMenuGroup: null,
+    overlay: false,
+    searchString: "",
     pokemonList: [],
   }),
 
   methods: {
+    searchPokemon() {
+      if (this.searchString != "") {
+        this.overlay = true;
+
+        PokemonDataService.getByName(this.searchString)
+          .then((response) => {
+            var pName = response.data.name;
+            var pUrl = "https://pokeapi.co/api/v2/pokemon/" + this.searchString;
+            this.pokemonList = [{ name: pName, url: pUrl }];
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        this.overlay = false;
+      } else {
+        this.getFirstGenPokemon();
+      }
+    },
+
     getFirstGenPokemon() {
       PokemonDataService.getKantoPokemon()
         .then((response) => {
